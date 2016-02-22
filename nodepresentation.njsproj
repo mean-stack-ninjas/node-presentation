@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{13cf22c7-364c-4ea1-bcb7-cd17feec7276}</ProjectGuid>
+    <ProjectHome />
+    <ProjectView>ShowAllFiles</ProjectView>
+    <StartupFile>app.js</StartupFile>
+    <WorkingDirectory>.</WorkingDirectory>
+    <OutputPath>.</OutputPath>
+    <ProjectTypeGuids>{3AF33F2E-1136-4D97-BBB7-1795711AC8B8};{349c5851-65df-11da-9384-00065b846f21};{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}</ProjectTypeGuids>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'" />
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
+  <ItemGroup>
+    <Content Include="package.json" />
+    <Content Include="public\images\benchmark3.jpg" />
+    <Content Include="README.md" />
+    <Compile Include="app.js" />
+    <Compile Include="config\index.js" />
+    <Compile Include="routes\index.js" />
+    <Content Include="views\controller.ejs" />
+    <Content Include="views\controller_layout.ejs" />
+    <Content Include="views\demo.ejs" />
+    <Content Include="views\layout.ejs" />
+    <Content Include="views\myppt.ejs" />
+    <Content Include="public\css\main.css" />
+    <Content Include="public\css\print.css" />
+    <Content Include="public\css\reset.css" />
+    <Content Include="public\css\style.css" />
+    <Content Include="public\images\arrow_down.png" />
+    <Content Include="public\images\arrow_left.png" />
+    <Content Include="public\images\arrow_right.png" />
+    <Content Include="public\images\arrow_up.png" />
+    <Content Include="public\images\benchmark1.png" />
+    <Content Include="public\images\benchmark2.png" />
+    <Content Include="public\images\eventloop1.png" />
+    <Content Include="public\images\eventloop2.png" />
+    <Content Include="public\images\eventloop3.png" />
+    <Content Include="public\images\io.png" />
+    <Content Include="public\images\web1.png" />
+    <Content Include="public\images\web2.png" />
+    <Content Include="public\images\rayn1.jpg" />
+    <Content Include="public\images\rayn2.jpg" />
+    <Compile Include="public\js\jquery-1.7.2.min.js" />
+    <Compile Include="public\js\reveal.js" />
+    <Content Include="public\lib\css\zenburn.css" />
+    <Compile Include="public\lib\js\classList.js" />
+    <Compile Include="public\lib\js\head.min.js" />
+    <Compile Include="public\lib\js\highlight.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="config" />
+    <Folder Include="public" />
+    <Folder Include="public\css" />
+    <Folder Include="public\images" />
+    <Folder Include="public\js" />
+    <Folder Include="public\lib" />
+    <Folder Include="public\lib\css" />
+    <Folder Include="public\lib\font" />
+    <Folder Include="public\lib\js" />
+    <Folder Include="routes" />
+    <Folder Include="views" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <!--Do not delete the following Import Project.  While this appears to do nothing it is a marker for setting TypeScript properties before our import that depends on them.-->
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="False" />
+  <Import Project="$(VSToolsPath)\Node.js Tools\Microsoft.NodejsTools.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:48022/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>True</UseCustomServer>
+          <CustomServerUrl>http://localhost:1337</CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}" User="">
+        <WebProjectProperties>
+          <StartPageUrl>
+          </StartPageUrl>
+          <StartAction>CurrentPage</StartAction>
+          <AspNetDebugging>True</AspNetDebugging>
+          <SilverlightDebugging>False</SilverlightDebugging>
+          <NativeDebugging>False</NativeDebugging>
+          <SQLDebugging>False</SQLDebugging>
+          <ExternalProgram>
+          </ExternalProgram>
+          <StartExternalURL>
+          </StartExternalURL>
+          <StartCmdLineArguments>
+          </StartCmdLineArguments>
+          <StartWorkingDirectory>
+          </StartWorkingDirectory>
+          <EnableENC>False</EnableENC>
+          <AlwaysStartWebServerOnDebug>False</AlwaysStartWebServerOnDebug>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

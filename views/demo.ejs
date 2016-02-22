@@ -1,0 +1,407 @@
+<div class="reveal">
+
+	<!-- Used to fade in a background when a specific slide state is reached -->
+	<div class="state-background"></div>
+	
+	<!-- Any section element inside of this container is displayed as a slide -->
+	<div class="slides">
+		<section>
+			<h1>Node.js</h1>
+			<h3 class="inverted"><a target="_blank" href="https://nodejs.org">https://nodejs.org</a></h3>
+      <h3 class="inverted"><a target="_blank" href="https://github.com/nodejs">https://github.com/nodejs</a></h3>
+			<script>
+				// Delicously hacky. Look away.
+				if( navigator.userAgent.match( /(iPhone|iPad|iPod|Android)/i ) ) document.write( '<p style="color: rgba(0,0,0,0.3); text-shadow: none;">('+'Tap to navigate'+')</p>' );
+			</script>
+		</section>
+		
+		<section>
+			<h2>Node.js</h2>
+			<p>
+				Node.js is a JavaScript runtime built on Chrome's V8 JavaScript engine.
+        <br/>
+        Node.js uses an event-driven, non-blocking I/O model that makes it lightweight and efficient.
+        <br/>
+        Node.js' package ecosystem, npm, is the largest ecosystem of open source libraries in the world.
+			</p>
+		</section>
+		
+		<!-- Example of nested vertical slides -->
+		<section>
+			<section>
+				<h2>Chrome V8</h2>
+        <p class="inverted"><a target="_blank" href="http://nikhilm.github.io/uvbook/">http://nikhilm.github.io/uvbook/</a></p>
+				<p>
+					Google's high performance, open source, JavaScript engine.
+				</p>
+			</section>
+      <section>
+        <h2>What is V8?</h2>
+        <p>
+          V8 is Google's open source high-performance JavaScript engine, written in C++ and used in Google Chrome, the open source browser from Google.
+          It implements ECMAScript as specified in ECMA-262, 3rd edition, and runs on Windows XP or later, Mac OS X 10.5+, and Linux systems that use IA-32, ARM or MIPS processors.
+          V8 can run standalone, or can be embedded into any C++ application.
+        </p>
+      </section>
+      <section>
+				<h2>libuv</h2>
+        <p class="inverted"><a target="_blank" href="http://nikhilm.github.io/uvbook/">http://nikhilm.github.io/uvbook/</a></p>
+				<p>
+          libuv is a multi-platform support library with a focus on asynchronous I/O.
+          It was primarily developed for use by Node.js, but it's also used by Luvit, Julia, pyuv, and others.
+        </p>
+      </section>
+      <section>
+        <h2>libuv feature highlights</h2>
+        <ul>          
+          <li>Full-featured event loop backed by epoll, kqueue, IOCP, event ports.</li>
+          <li>Asynchronous TCP and UDP sockets</li>
+          <li>Asynchronous DNS resolution</li>
+          <li>Asynchronous file and file system operations</li>
+          <li>File system events</li>
+          <li>ANSI escape code controlled TTY</li>
+          <li>IPC with socket sharing, using Unix domain sockets or named pipes (Windows)</li>
+          <li>Child processes</li>
+          <li>Thread pool</li>
+          <li>Signal handling</li>
+          <li>High resolution clock</li>
+          <li>Threading and synchronization primitives</li>
+        </ul>
+			</section>
+		</section>
+
+		<section>
+      <section>
+        <div>
+          <img src="/images/rayn1.jpg" style="width:300px; height:500px;"/>
+          <img src="/images/rayn2.jpg" style="width:400px; height:500px;"/>
+        </div>
+      </section>
+			<section>
+			  <h2>Ryan Dahl, creator of Node.js 2009</h2>
+        <p>
+          Early 2009, Ryan Dahl was looking at a file upload progress bar on Flickr and was wondering how the progress bar is updating without a page refresh? This is a file upload via http & not ftp!!. Then he found out that the client was polling the server like every second asking, how much of the file is uploaded? And this kind of seemed very tiresome and boring way of doing things. So Ryan wanted to build a Web server that is optimized for this kind of a behavior, where the server is non-blocking in nature. i.e. I/O needs to be handled differently 
+        </p>
+		  </section>
+      <section>
+        <p>
+          After a lot of experimentation on Ruby, Python, VB & other high level languages, Ryan had found that only Javascript seems very apt for this purpose. Things like closures, anonymous functions are an added advantage with Javascript. And more over this is a dynamic web server, so a web developer will be aware of Javascript (avoiding training altogether!). 
+        </p>
+      </section>
+      <section>
+        <p>
+          Node.js uses Google’s V8 Javascript engine to parse the Javascript code. Technically speaking Node.js is ~40% Javascript & ~60% C++.
+        </p>
+      </section>
+      <section>
+        <p>
+          How I/O operations will reduce the speed & performance.
+        </p>
+          DB Call
+          <pre>
+            <code contenteditable="" style="font-size: 18px; margin-top: 5px;">
+              var result = db.query("select * from someTable");
+              // use the result here and do something
+            </code>
+          </pre>
+        <p>
+          So what exactly is the software or your application doing when the db query is going on? Waiting for the response right?
+        </p>
+        <p>
+          File Reader
+          <pre>
+            <code contenteditable="" style="font-size: 18px; margin-top: 5px;">
+              var file= fs.readFile("/usr/somefile");
+              // parse the file and do something
+            </code>
+          </pre>
+        </p>
+        <p>
+          This is another I/O operation, where we wait till the file is read.
+        </p>
+      </section>
+      <section>
+        <div>
+          <img src="/images/io.png" style="width:400px; height:50px;"/>
+        </div>
+        <p>
+          The green part indicates the actual operation that needs to take place for a given task and the orange part is the waiting for the I/O on that task.
+        </p>
+      </section>
+      <section>
+        <div>
+          <img src="/images/eventloop1.png" style="width:800px; height:500px;"/>
+        </div>
+      </section>
+      <section>
+        <div>
+          <img src="/images/eventloop2.png" style="width:800px; height:500px;"/>
+        </div>
+      </section>
+      <section>
+        <p>
+          It is a simple mechanism – when an event is raised, a task is sent to the server. The main thread stacks up the received event task in a queue. An event loop keeps monitoring the queue picks up the new event task and redirects it to its corresponding I/O operation. And the main thread is free to pick another event task. Once the I/O part of the event task is completed, it is again pushed back to the event queue by the thread pool. Now the event loop checks if there are any more pending things to be done for this task and dispatches the same accordingly.
+        </p>
+      </section>
+      <section>
+        <p>
+          The main thread never waits for completion of any I/O tasks. This keeps our server pretty free & ready to serve more requests.
+        </p>
+      </section>
+      <section>
+        <p>
+          By default size of libuv’s thread pool is 4. We can set number of background threads withUV_THREADPOOL_SIZE environment variable. We cannot change thread pool size once it is created and it is created on the first request.
+        </p>
+        <pre>
+          <code contenteditable="" style="font-size: 18px; margin-top: 5px;">
+            process.env.UV_THREADPOOL_SIZE =12;
+          </code>
+        </pre>
+      </section>
+		</section>
+
+    <section>
+      <section>
+        <h2>Comparing Node.js vs PHP Performance</h2>
+        <h5>Benchmark 1: Simple HTTP Requests</h5>
+        <div>
+          <img src="/images/benchmark1.png"></img>
+        </div>
+      </section>
+      <section>
+        <h5>Benchmark 2: HTTP + CPU tasks</h5>
+        <div>
+          <img src="/images/benchmark2.png"></img>
+        </div>
+      </section>
+      <section>
+        <h5>Benchmark 3: CombSort Strict CPU Test</h5>
+        <div>
+          <img src="/images/benchmark3.jpg"></img>
+        </div>
+      </section>
+      <section>
+        <h6>What is HHVM?</h6>
+        <p>
+          HHVM is an open-source virtual machine designed for executing programs written in Hackand PHP. HHVM uses a just-in-time (JIT) compilation approach to achieve superior performance while maintaining the development flexibility that PHP provides.
+        </p>
+        <p>
+          HHVM supports Hack, PHP 5 and the major features of PHP 7. We are aware of minor incompatibilities, so please open issues when you find them. HHVM also supports many extensions as well.
+        </p>
+      </section>
+    </section>
+		<section>
+      <section>
+			  <h2>Pros and Cons of Node.js</h2>
+      </section>
+      <section>
+        <h2>Pros, Why to use Node?</h2>
+        <ul>
+          <li>Asynchronous event driven IO helps concurrent request handling.</li>
+          <li>Uses JavaScript, which is easy to learn.</li>
+          <li>Share the same piece of code with both server and client side.</li>
+          <li>npm, the Node packaged modules has already become huge, and still growing.</li>
+          <li>Active and vibrant community, with lots of code shared via github, etc.</li>
+          <li>You can stream big files.</li>
+          <li>Fast processing, faster than Ruby, Python, or Perl.</li>
+          <li>Concurrent request handling, thousands</li>
+        </ul>
+      </section>
+      <section>
+        <h2>Cons</h2>
+        <ul>
+          <li>Node.js doesn’t provide scalability. One CPU is not going to be enough; the platform provides no ability to scale out to take advantage of the multiple cores commonly present in today’s server-class hardware.</li>
+          <li>Dealing with relational database is a pain if you are using Node.</li>
+          <li>Every time using a callback end up with tons of nested callbacks.</li>
+          <li>Without diving in depth of JavaScript if someone starts Node, he may face conceptual problem.</li>
+          <li>Node.js is not suited for CPU-intensive tasks. It is suited for I/O stuff only (like web servers).</li>
+        </ul>
+      </section>
+      <section>
+        <p>
+          Addons as described in the Node.js documentation are dynamically linked shared objects. They can provide glue to C and C++ libraries.
+          So you can write your heavy computation in a lower level language (C/C++) and do it much more efficiently than with JavaScript, no matter how powerful V8 is.
+          Read the docs on how to use Addons and I believe you'll find it a fantastic feature of NodeJS.
+        </p>
+      </section>
+		</section>
+
+		<section>
+      <section>
+			  <h2>Where Node can be the best solution?</h2>
+			  <ul>
+				  <li>
+            <h5>Web Socket Server</h5>
+            <p>
+              The non-blocking architecture of node makes it the best suited solution for socket server applications or broadcasting like applications. Chat servers can become more efficient and real time using Node.js as their base.
+            </p>
+          </li>
+          <li>
+            <h5>Fast file upload client</h5>
+            <p>
+              With node you can upload multiple files at a time. That means it is possible that a part of file1 and another part of file2 is in the server at a given point of time. This approach makes file uploading dramatically fast.
+            </p>
+          </li>
+        </ul>
+      </section>
+      <section>
+        <h2>Where Node can be the best solution?</h2>
+        <ul>
+          <li>
+            <h5>Data streaming</h5>
+            <p>
+              As node deals with callback concept, it can easily be used for streaming data flow. It can be really useful for Travel industry where they fetch results from different APIs of different suppliers.
+            </p>
+          </li>
+          <li>
+            <h5>Stock exchange software</h5>
+            <p>
+              Things has to be very much real time in case of stock updates. Node helps us to develop real time web applications.
+            </p>
+          </li>
+          <li>
+            <h5>PROXY</h5>
+            <p>
+              Node.js is easily employed as a server-side proxy where it can handle a large amount of simultaneous connections in a non-blocking manner. It’s especially useful for proxying different services with different response times, or collecting data from multiple source points.
+            </p>
+          </li>
+        </ul>
+      </section>
+      <section>
+        <h2>Where Node can be the best solution?</h2>
+        <ul>
+          <li>
+            <h5>APPLICATION MONITORING DASHBOARD</h5>
+            <p>
+              Another common use-case in which Node-with-web-sockets fits perfectly: tracking website visitors and visualizing their interactions in real-time. (If you’re interested, this idea is already being productized byHummingbird.)
+            </p>
+          </li>
+          <li>
+            <h5>API ON TOP OF AN OBJECT DB</h5>
+            <p>
+              Although Node.js really shines with real-time applications, it’s quite a natural fit for exposing the data from object DBs (e.g. MongoDB). JSON stored data allow Node.js to function without the impedance mismatch and data conversion.
+            </p>
+          </li>
+          <li>
+            <h5>SYSTEM MONITORING DASHBOARD</h5>
+            <p>
+              Now, let’s visit the infrastructure side of things. Imagine, for example, an SaaS provider that wants to offer its users a service-monitoring page (e.g., GitHub’s status page). With the Node.js event-loop, we can create a powerful web-based dashboard that checks the services’ statuses in an asynchronous manner and pushes data to clients using websockets.
+            </p>
+          </li>
+        </ul>
+      </section>
+		</section>
+
+		<section>
+      <section>
+        <h2>What companies are using Node.js in production?</h2>
+        <p>
+          For an official list of sites using Node.js for production, kindly refer to the Github wiki
+        </p>
+        <p>
+          <a href="https://github.com/joyent/node/w...">https://github.com/joyent/node/w...</a>
+        </p>
+        <ul>
+          <li>
+            <h5>LinkedIn</h5>
+            <p>
+              Use node.js as the server interface for it's mobile applications
+              <br/>
+              <a href="https://www.talentbuddy.co/blog/building-with-node-js-at-linkedin/">Building With Node.js At LinkedIn</a>
+            </p>
+          </li>
+          <li>
+            <h5>PayPal</h5>
+            <p>
+              Created the KrakenJS framework, which is now used in the developement of all new web applications.
+              <br/>
+              <a href="https://www.talentbuddy.co/blog/building-with-node-js/">Building With Node.js at PayPal</a>
+            </p>
+          </li>
+        </ul>
+      </section>
+      <section>
+        <h2>What companies are using Node.js in production?</h2>
+        <ul>
+          <li>
+            <h5>Uber</h5>
+            <p>
+              Everyone's Private Driver
+              <br/>
+              <a href="https://www.joyent.com/developers/videos/node-js-office-hours-curtis-chambers-uber">Node.js Meetup: Distributed Web Architectures - Curtis Chambers, Uber</a>
+            </p>
+          </li>
+          <li>
+            <h5>Yahoo!</h5>
+            <p>
+              Node.js is the basis of Yahoo! Manhattan, part of the"Cocktails platform
+            </p>
+          </li>
+        </ul>
+      </section>
+      <section>
+        <h2>What companies are using Node.js in production?</h2>
+        <ul>
+          <li>
+            <h5>Yammer</h5>
+            <p>
+              The Yammer Application Platform heavily uses node.js
+            </p>
+          </li>
+          <li>
+            <h5>Wikipedia</h5>
+            <p>
+              Wikipedia and other Wikimedia Foundation projects use Node.js forVisualEditor's backend,Parsoid.
+            </p>
+          </li>
+        </ul>
+      </section>
+    </section>
+		
+		<section>
+      <section>
+			  <h2>References</h2>
+			  <ol>
+          <li>https://github.com/nodejs/node/wiki</li>
+          <li>https://www.quora.com/What-companies-are-using-Node-js-in-production</li>
+          <li>https://github.com/nodejs/node-v0.x-archive/wiki/Projects,-Applications,-and-Companies-Using-Node</li>
+          <li>https://developers.google.com/v8/</li>
+          <li>https://github.com/libuv/libuv</li>
+          <li>http://www.hostingadvice.com/blog/comparing-node-js-vs-php-performance/</li>
+          <li>http://hhvm.com/</li>
+        </ol>
+      </section>
+      <section>
+        <h2>References</h2>
+        <ol>
+          <li>http://thejackalofjavascript.com/nodejs/</li>
+          <li>http://berb.github.io/diploma-thesis/original/042_serverarch.html</li>
+          <li>http://voidcanvas.com/describing-node-js/</li>
+          <li>http://www.codingeek.com/tutorials/nodejs/is-nodejs-single-threaded/</li>
+          <li>http://www.toptal.com/nodejs/why-the-hell-would-i-use-node-js</li>
+        </ol>
+      </section>
+		</section>
+
+		<section>
+			<h1>Practice</h1>
+		</section>
+	</div>
+
+	<!-- The navigational controls UI -->
+	<aside class="controls">
+		<a class="left" href="#">&#x25C4;</a>
+		<a class="right" href="#">&#x25BA;</a>
+		<a class="up" href="#">&#x25B2;</a>
+		<a class="down" href="#">&#x25BC;</a>
+	</aside>
+
+	<!-- Displays presentation progress, max value changes via JS to reflect # of slides -->
+	<div class="progress"><span></span></div>
+	
+</div>
+
+
+
+
+
