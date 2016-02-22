@@ -15,26 +15,13 @@ var io = require('socket.io');
 // socket io setup
 io = io.listen(app);
 
-// configure socket.io
-io.configure(function () {
-  
-  // recommended production testing
-  //io.enable('browser client minification');  // send minified client
-  //io.enable('browser client etag');          // apply etag caching logic based on version number
-  //io.enable('browser client gzip');          // gzip the file
-  
-  io.set('log level', 1); // reduce level of logging to warning only
-  
-  io.set('transports', [
-      'websocket'
-    , 'flashsocket'
-    , 'htmlfile'
-    , 'xhr-polling'
-    , 'jsonp-polling'
-  ]);
-  
-  
-});
+io.set('transports', [
+  'websocket'
+, 'flashsocket'
+, 'htmlfile'
+, 'xhr-polling'
+, 'jsonp-polling'
+]);
 
 
 // configure express
