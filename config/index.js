@@ -3,13 +3,7 @@ var config = {
 	presentations : {
 		'demo' : { // demo presentation
 			id: 'demo',  // id for each presentation, currently same as the url
-			title : 'Demo Presentation',
-			indexh : 0,  // initial slide horizontal index
-			indexv : 0,  // initial slide veriticlal index
-		},
-		'myppt' : { // powerpoint presentation
-			id: 'myppt', 
-			title : 'My Presentation',
+			title : 'Nodejs Presentation',
 			indexh : 0,  // initial slide horizontal index
 			indexv : 0,  // initial slide veriticlal index
 		}
